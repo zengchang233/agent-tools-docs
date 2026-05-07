@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+# Local editor and tool state
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Runtime logs and temporary files
+*.log
+*.tmp
+.cache/
