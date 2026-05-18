@@ -40,5 +40,15 @@
 - Important implementation areas: `.claude-plugin/`, `commands/`, `scripts/`, `hooks/`, `skills/`, `prompt-template/`, `tests/`.
 - Practical caveat: best for planned medium/large code work; heavy for small one-off edits.
 
+### OthmanAdi/planning-with-files
+- Repo: https://github.com/OthmanAdi/planning-with-files
+- Category chosen: `coding-agents`
+- Rationale: Planning with Files is a cross-agent skill/plugin that changes how coding agents such as Claude Code and Codex plan, remember, recover context, and decide when work is complete. It is closer to an agent workflow tool than a generic devtool.
+- Current version checked: `v2.37.0`, latest release published 2026-05-05.
+- Core concept: use `task_plan.md`, `findings.md`, and `progress.md` as persistent filesystem memory for complex agent tasks.
+- Main capabilities: three-file planning templates, lifecycle hooks, session catchup after `/clear`, parallel plan isolation under `.planning/`, active plan switching/resolution, Stop hook completion checks, and SHA-256 plan attestation via `/plan-attest`.
+- Key implementation areas: `skills/planning-with-files/SKILL.md`, `templates/`, `scripts/`, `commands/`, `.claude-plugin/`, `.codex/`, platform-specific IDE folders, and `tests/`.
+- Practical caveat: high leverage for multi-step or long-context work; overhead is unnecessary for simple one-off edits.
+
 ## Future Research Notes
 第一个 repo 已归档。后续继续按 repo 链接创建分类文档。
