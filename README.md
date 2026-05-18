@@ -24,6 +24,7 @@
 - `agent-frameworks/`
 - `mcp-tools/`
 - `llm-app-frameworks/`
+- `ai-gateways/`
 - `browser-automation/`
 - `eval-observability/`
 - `devtools/`

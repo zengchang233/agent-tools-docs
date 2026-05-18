@@ -20,6 +20,7 @@
 | `agent-frameworks/` | 多 agent 编排、agent runtime、agent SDK/framework。 |
 | `mcp-tools/` | Model Context Protocol server/client/tooling。 |
 | `llm-app-frameworks/` | RAG、LLM app、workflow、prompt orchestration 框架。 |
+| `ai-gateways/` | AI API 网关、中转、账号池、额度分发、统一鉴权/计费/调度平台。 |
 | `browser-automation/` | Browser agent、网页自动化、爬取与交互。 |
 | `eval-observability/` | LLM eval、tracing、observability、benchmark。 |
 | `devtools/` | CLI、IDE、工程效率、脚手架、开发辅助工具。 |
@@ -49,6 +50,21 @@
 - Main capabilities: three-file planning templates, lifecycle hooks, session catchup after `/clear`, parallel plan isolation under `.planning/`, active plan switching/resolution, Stop hook completion checks, and SHA-256 plan attestation via `/plan-attest`.
 - Key implementation areas: `skills/planning-with-files/SKILL.md`, `templates/`, `scripts/`, `commands/`, `.claude-plugin/`, `.codex/`, platform-specific IDE folders, and `tests/`.
 - Practical caveat: high leverage for multi-step or long-context work; overhead is unnecessary for simple one-off edits.
+
+### Wei-Shaw/sub2api
+- Repo: https://github.com/Wei-Shaw/sub2api/tree/main
+- Category chosen: `ai-gateways`
+- Rationale: Sub2API is a deployable AI API gateway/SaaS platform that manages upstream AI subscriptions, quota distribution, authentication, billing, scheduling, request forwarding, and a Vue admin console. It is broader than a small devtool and is not a coding agent itself.
+- Current main commit checked from shallow clone: `f5bd25bea045e728846b38bf18080ffa48d133c6`.
+- Visible stack: Go backend with Gin, Ent, Wire, PostgreSQL, Redis, h2c support, payment providers, model pricing resources, plus Vue 3/Vite/Tailwind/Pinia frontend.
+- Initial deployment modes: one-click binary install, Docker Compose with auto setup, and source build with embedded frontend.
+- First implementation note: `backend/cmd/server/main.go` handles version/setup flags, web setup wizard or Docker auto setup, then initializes the main server through Wire.
+- Path correction: guessed `backend/internal/server/routes/routes.go` does not exist; route files need locating under the actual `backend/internal/server/routes/` directory.
+- Gateway routes live in `backend/internal/server/routes/gateway.go`: Anthropic-compatible `/v1/messages`, `/v1/responses`, OpenAI-compatible `/v1/chat/completions`, `/v1beta` Gemini, Codex aliases, and Antigravity-only routes.
+- Gateway scheduling centers on `GatewayService`: parse request once, derive sticky session hash, resolve group/platform, apply model-routing rules, filter schedulable accounts, check quota/window cost/RPM, then sort by priority/load/last used and acquire Redis-backed concurrency slots.
+- Supported platforms/account types are defined in `backend/internal/domain/constants.go`: platforms include Anthropic, OpenAI, Gemini, Antigravity; account types include OAuth, setup-token, API key, upstream passthrough, Bedrock, and Google service account.
+- Config surface includes h2c, CORS/CSP/security URL allowlist, response header filtering, billing circuit breaker, image concurrency, scheduler waiting/loads/outbox, TLS fingerprinting, Gemini OAuth/quota simulation, and Docker auto-setup secrets.
+- Created `ai-gateways/sub2api.md` as the final learning document.
 
 ## Future Research Notes
 第一个 repo 已归档。后续继续按 repo 链接创建分类文档。

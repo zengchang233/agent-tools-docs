@@ -21,3 +21,13 @@
 - Classified `OthmanAdi/planning-with-files` as `coding-agents` because it provides a skill/plugin and hook workflow for coding agents including Claude Code and Codex.
 - Created `coding-agents/planning-with-files.md` covering purpose, architecture, installation, Claude Code/Codex usage, productivity scenarios, tradeoffs, key files, and sources.
 - Updated `findings.md` with planning-with-files classification notes and core findings.
+
+## 2026-05-18
+- Started research for `https://github.com/Wei-Shaw/sub2api/tree/main`.
+- Verified the GitHub repository page and initial README positioning: Sub2API is an AI API gateway platform for subscription quota distribution, with Go, Vue, PostgreSQL, Redis, and Docker as the visible stack.
+- Added Phase 5 to `task_plan.md` for the `Wei-Shaw/sub2api` documentation task.
+- Cloned `Wei-Shaw/sub2api` at commit `f5bd25bea045e728846b38bf18080ffa48d133c6` for source-level reading.
+- Read README_CN, DEV_GUIDE, deploy docs/config, Go module, frontend package metadata, server entrypoint, gateway/admin/user/common routes, core gateway/account/billing/concurrency services, domain constants, Ent schemas, frontend router/API client, Makefiles, and CI workflows.
+- Added new category `ai-gateways/` for AI API gateway and relay platforms.
+- Created `ai-gateways/sub2api.md` covering purpose, architecture, deployment, Claude Code/Codex usage, production scenarios, risks, comparisons, key files, and sources.
+- Updated `findings.md` and README category list with `ai-gateways`.
