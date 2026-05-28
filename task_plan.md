@@ -4,7 +4,7 @@
 把 `/data/projects/opensource/docs` 作为长期知识库：用户提供前沿 GitHub repo 链接后，分析该 repo 的目的、核心实现、适用场景，以及在 Claude Code / Codex 中的用法，并按工具类型分类保存为独立 Markdown 文档。
 
 ## Current Phase
-Phase 5 complete: `Wei-Shaw/sub2api` learning document is archived.
+Phase 6 complete: `can1357/oh-my-pi` usage manual is archived.
 
 ## Operating Rules
 1. 每次收到 repo 链接，先确认 repo 名称、官方链接、当前 README/文档信息；需要最新信息时必须联网核验。
@@ -35,6 +35,10 @@ Phase 5 complete: `Wei-Shaw/sub2api` learning document is archived.
 
 ### Phase 5: Process third repo link
 - User provided `Wei-Shaw/sub2api`; create categorized repo document.
+- **Status:** complete
+
+### Phase 6: Process fourth repo link
+- User provided `can1357/oh-my-pi`; create categorized repo usage manual.
 - **Status:** complete
 
 ## Default Repo Analysis Workflow

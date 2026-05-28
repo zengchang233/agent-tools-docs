@@ -31,3 +31,12 @@
 - Added new category `ai-gateways/` for AI API gateway and relay platforms.
 - Created `ai-gateways/sub2api.md` covering purpose, architecture, deployment, Claude Code/Codex usage, production scenarios, risks, comparisons, key files, and sources.
 - Updated `findings.md` and README category list with `ai-gateways`.
+
+## 2026-05-27
+- Started research for `https://github.com/can1357/oh-my-pi`.
+- Verified the official GitHub README positioning: `omp` is a terminal AI coding agent/fork of Pi with hash-anchored edits, optimized tool harness, LSP, Python/Bun eval, browser/web search, subagents, multi-provider routing, SDK/RPC/ACP entry points, and MIT license.
+- Added Phase 6 to `task_plan.md` and preliminary notes to `findings.md`.
+- Cloned `can1357/oh-my-pi` shallowly to `/tmp/oh-my-pi.ytwlc5/repo` and inspected README, package metadata, docs, CLI args, tool registry, config/model/session/SDK/RPC/MCP/LSP/memory/approval docs, package layout, and built-in `.omp` examples.
+
+- Created `coding-agents/oh-my-pi.md` following the repo-analysis template, with expanded usage-manual content for installation, model/provider configuration, `.omp` project setup, Claude Code/Codex workflows, production scenarios, architecture, key files, and sources.
+- Updated `task_plan.md` Phase 6 status to complete and added final classification/usage notes to `findings.md`.

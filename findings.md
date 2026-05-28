@@ -68,3 +68,20 @@
 
 ## Future Research Notes
 第一个 repo 已归档。后续继续按 repo 链接创建分类文档。
+
+### can1357/oh-my-pi
+- Repo: https://github.com/can1357/oh-my-pi
+- Category candidate: `coding-agents`
+- Rationale: oh-my-pi / `omp` is positioned as a terminal-first AI coding agent with built-in code editing, LSP, debugger, subagents, browser/web search, model-provider routing, and SDK/RPC/ACP entry points.
+- Official README describes installation via `curl -fsSL https://omp.sh/install | sh`, Bun global install `bun install -g @oh-my-pi/pi-coding-agent`, Windows PowerShell installer, and mise-pinned versions.
+- Initial feature set observed from README: hash-anchored edits, summarized read/search, LSP, DAP debugger, subagents, web_search, browser, Hindsight memory, ACP/editor integration, Node SDK, RPC mode, and multi-provider routing.
+- Source-level clone checked at commit `159f2d8fb1ac567e4db742171c7a126b07d5d5eb`; npm `@oh-my-pi/pi-coding-agent` latest dist-tag resolved to `15.5.3` during this session.
+- Monorepo package map: `pi-coding-agent` (CLI/SDK), `pi-agent-core` (runtime), `pi-ai` (multi-provider client), `pi-tui` (terminal UI), `pi-natives` (Rust/N-API search/shell/AST/PTY/etc.), `hashline` (content-hash patch language), `omp-stats`, and `swarm-extension`.
+- Main runtime modes: interactive TUI, one-shot print (`omp -p`), JSON/text output modes, JSONL RPC (`omp --mode rpc`), RPC UI, and ACP editor mode (`omp acp`).
+- Core config roots: native `.omp` has highest provider priority, and OMP can inherit or interoperate with `.claude`, `.codex`, `.gemini`, Cursor/Windsurf/Cline/Copilot/VScode-style rule/config formats.
+- Built-in tools enumerated in source include `read`, `bash`, `edit`, `write`, `search`, `find`, `ast_grep`, `ast_edit`, `eval`, `lsp`, `debug`, `task`, `irc`, `web_search`, `browser`, `github`, `recipe`, `todo_write`, memory tools, image/mermaid/calculator helpers, and hidden `resolve`/`yield`/review helpers.
+- Safety note: tool approval modes are `always-ask`, `write`, and `yolo`; README/CLI expose `--auto-approve`/`--yolo`, but production use should prefer prompting for exec/destructive tools.
+
+- Created `coding-agents/oh-my-pi.md` as the final usage manual.
+- Final positioning: keep `can1357/oh-my-pi` under `coding-agents`; it is an end-user coding agent plus embeddable runtime, not just a devtool. It can also touch `agent-frameworks` because of SDK/RPC/ACP/subagents, but its primary user-facing artifact is the `omp` coding agent CLI.
+- Practical usage guidance: use `omp` as an independent terminal agent, `omp -p` as a one-shot reviewer/researcher alongside Claude Code/Codex, `--mode rpc`/SDK/ACP for embedding, and conservative `--approval-mode always-ask` or `write` for real repositories.
