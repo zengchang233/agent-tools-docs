@@ -64,13 +64,15 @@
 
 ### 如果你想新增一个 repo
 
+如果你使用 Claude Code、Codex 或其他 coding agent 参与贡献，请先阅读 [`AGENTS.md`](AGENTS.md)。里面记录了本仓库期望的研究流程、写作风格、分类规则，以及公开文件和本地工作记忆的边界。
+
 只需要提供一个或多个 GitHub repo 链接。分析流程会按下面的方式进行：
 
 1. 核验官方仓库、README、文档和版本信息；
 2. 判断工具类型，并放入合适的分类目录；
 3. 创建独立 Markdown 文档：`<category>/<repo-name>.md`；
 4. 总结项目目的、核心实现、上手方式、Claude Code / Codex 工作流、适用场景和风险；
-5. 把研究过程和后续线索记录到 `findings.md`、`progress.md`、`task_plan.md`。
+5. 中间研究笔记保留在本地，只把整理后的分类文档和 README 索引更新提交到公开仓库。
 
 ## 文档结构约定
 
@@ -110,9 +112,8 @@
 
 ## 维护说明
 
-- `findings.md`：记录研究发现、判断依据和后续线索；
-- `progress.md`：记录每次整理的进度和变更；
-- `task_plan.md`：记录长期维护计划和当前阶段；
+- 面向读者的知识内容应沉淀在 `coding-agents/*.md`、`ai-gateways/*.md` 等分类文档里；
+- 本地计划、草稿 findings、会话进度日志应保留在 `.planning/` 或其他 local-only 文件中，并保持 ignored；
 - Badge 中的 Stars 由 GitHub / Shields 动态生成，Visitors 由第三方访问计数 badge 按页面加载累计，适合作为公开展示参考。
 
 ---

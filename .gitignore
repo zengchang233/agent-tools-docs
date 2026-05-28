@@ -13,7 +13,7 @@ Thumbs.db
 .cache/
 
 # Local planning / agent working memory
-.planning/
-task_plan.md
-findings.md
-progress.md
+/.planning/
+/task_plan.md
+/findings.md
+/progress.md

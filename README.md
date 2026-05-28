@@ -66,13 +66,15 @@ This is not just a bookmark list or a README translation collection. The goal is
 
 ### If you want to add a repository
 
+If you contribute with Claude Code, Codex, or another coding agent, read [`AGENTS.md`](AGENTS.md) first. It captures the expected research process, writing style, category rules, and public-vs-local file boundaries for this repository.
+
 Provide one or more GitHub repository links. The analysis workflow is:
 
 1. Verify the official repository, README, docs, and version information;
 2. Classify the project and choose the right category directory;
 3. Create a standalone Markdown document at `<category>/<repo-name>.md`;
 4. Summarize the project purpose, implementation, setup, Claude Code / Codex workflows, use cases, and risks;
-5. Record research findings and follow-up notes in `findings.md`, `progress.md`, and `task_plan.md`.
+5. Keep intermediate research notes local, and publish only the polished category document plus README index updates.
 
 ## Document format
 
@@ -112,9 +114,8 @@ The reusable template lives at [`_templates/repo-analysis-template.md`](_templat
 
 ## Maintenance notes
 
-- `findings.md`: research findings, reasoning, and follow-up leads;
-- `progress.md`: session progress and change history;
-- `task_plan.md`: long-term maintenance plan and current phase;
+- Public-facing knowledge should live in category documents such as `coding-agents/*.md` and `ai-gateways/*.md`;
+- Local planning memory, scratch findings, and session progress logs should stay ignored in `.planning/` or other local-only files;
 - Stars are generated dynamically through GitHub / Shields, and the visitor counter is provided by a third-party badge service. They are intended as public display indicators.
 
 ---
