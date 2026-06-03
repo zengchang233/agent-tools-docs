@@ -94,6 +94,17 @@ The standard section order is:
 
 Do not omit the Claude Code and Codex sections unless the project is clearly unrelated to agent-assisted development.
 
+
+## Default behavior for repo-summary requests
+
+When a user asks to summarize, analyze, or explain the usage of a GitHub repository while working in this workspace, treat the default deliverable as a public repository note, not just a chat-only answer, unless the user explicitly asks for a conversational summary only. The default workflow is:
+
+1. Verify the official repository and current primary docs.
+2. Create or update `<category>/<repo-name>.md` using the standard section order.
+3. Update the matching index tables in both `README.md` and `README.zh-CN.md`.
+4. Keep planning files and scratch research local and unstaged.
+5. If the user asks to push or says to continue until push, run the commit hygiene checks, commit only intended public files, push to the configured remote, and verify the final working tree.
+
 ## Research workflow for new repos
 
 When adding or updating a project note:

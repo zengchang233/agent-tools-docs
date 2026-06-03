@@ -48,6 +48,7 @@ This is not just a bookmark list or a README translation collection. The goal is
 | [planning-with-files](coding-agents/planning-with-files.md) | File-based planning and persistent task memory | Preventing context loss and goal drift during long-running agent tasks |
 | [humanize](coding-agents/humanize.md) | Claude implementation + Codex review loop | Building traceable multi-round AI coding workflows |
 | [oh-my-pi](coding-agents/oh-my-pi.md) | Terminal AI coding agent / runtime | Exploring a full agent harness with LSP, DAP, subagents, RPC, and SDK support |
+| [warp](coding-agents/warp.md) | Agentic development environment / terminal for local and cloud agents | Using Warp as a terminal-first workspace for Warp Agent, Claude Code, Codex, MCP, and Oz cloud agents |
 
 ### AI Gateways
 

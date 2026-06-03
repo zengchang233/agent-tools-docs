@@ -46,6 +46,7 @@
 | [planning-with-files](coding-agents/planning-with-files.md) | 文件化计划与长期任务记忆 | 想解决长任务上下文丢失、目标漂移问题 |
 | [humanize](coding-agents/humanize.md) | Claude 实现 + Codex 审查闭环 | 想把 AI coding 做成多轮可追踪开发流程 |
 | [oh-my-pi](coding-agents/oh-my-pi.md) | 终端 AI coding agent / runtime | 想了解带 LSP、DAP、subagents、RPC/SDK 的完整 agent harness |
+| [warp](coding-agents/warp.md) | Agentic development environment / agent 终端 | 想把 Warp Agent、Claude Code、Codex、MCP 和 Oz cloud agents 放进统一终端工作台 |
 
 ### AI Gateways
 
