@@ -2,7 +2,8 @@
 
 > Repo: https://github.com/PolyArch/humanize  
 > Category: `coding-agents`  
-> Last checked: 2026-05-07
+> Last checked: 2026-06-05
+> Checked docs version: 1.16.0
 
 ## 1. 一句话总结
 Humanize 是一个 Claude Code 插件，用 Claude 负责实现、Codex 负责独立审查，把 AI coding 从一次性生成变成可追踪的迭代开发闭环。它的核心工作流叫 RLCR：Ralph-Loop with Codex Review。
@@ -91,9 +92,78 @@ humanize monitor gemini
 - 注意事项：默认 Codex 模型来自 config，README 当前默认配置为 `gpt-5.5:high`；生产环境应谨慎使用 `HUMANIZE_CODEX_BYPASS_SANDBOX`，因为它会绕过 sandbox/approval 保护。
 
 ## 8. 典型生产力场景
+
+### 面向 AI 算法工程师的正确使用姿势
+
+对 AI 算法工程师来说，Humanize 不应该被理解成“把模型输出写得更像人”或“给 AI 生成内容去味”的工具。这里的 Humanize 更像一个**算法研发任务的工程化执行闭环**：人负责定义研究假设、指标边界、数据约束和验收标准；Claude 负责按计划改代码；Codex 负责从独立 reviewer 视角检查实现是否偏离目标、是否有工程风险。
+
+比较正确的心智模型是：
+
+```text
+算法负责人：定义问题、指标、数据边界、实验约束和是否上线
+Humanize plan：把想法固化成可执行、可审查、可回滚的工程任务
+Claude Code：按 plan 修改训练、评测、推理、配置或文档代码
+Codex：独立审查 summary 和 diff，追问遗漏、风险和验收不完整之处
+人类：决定是否继续迭代、是否接受结果、是否进入真实训练/上线流程
+```
+
+适合交给 Humanize 的算法类任务，通常不是“帮我做一个更好的模型”这种开放研究问题，而是已经能写清楚边界的工程化改动，例如：
+
+- 重构训练 / 评测 pipeline，但保持指标口径不变；
+- 给现有模型加入新的 feature、ablation 开关或配置项；
+- 把离线评测脚本标准化，补充固定 seed、数据版本、输出目录和报告格式；
+- 为 RAG、ranking、LLM agent 增加评测集、回放脚本或 regression tests；
+- 清理 experiment config、checkpoint 命名、日志字段、指标上报；
+- 对已有算法 diff 做独立 code review，重点查数据泄露、指标错配和不可复现问题。
+
+启动 RLCR 之前，算法负责人最好先把 plan 写到“工程任务单”的粒度，而不是只写研究愿望。一个实用模板是：
+
+```text
+目标：
+- 要改哪个模型 / pipeline / eval harness？
+- 本次只解决什么问题，不解决什么问题？
+
+研究假设：
+- 为什么这个改动可能有效？
+- 如果结果没有提升，如何判断是实现问题还是假设失败？
+
+数据边界：
+- 使用哪些 dataset / split / snapshot？
+- 禁止读取哪些线上数据、隐私字段或未来信息？
+
+指标与验收：
+- 主指标、辅助指标、回归指标分别是什么？
+- 最小验收标准是什么？哪些指标不能退化？
+
+实现范围：
+- 允许修改哪些目录？
+- 哪些训练脚本、推理接口、线上路径不能动？
+
+验证方式：
+- 必须运行哪些 unit test / smoke test / eval command？
+- 大规模 GPU 训练、线上 A/B、生产发布是否只保留为人工步骤？
+
+风险：
+- 数据泄露、随机性、缓存污染、成本、权限、回滚方式。
+```
+
+在这个前提下，Humanize 的价值会更明显：Claude 可以稳定执行明确的工程改动，Codex 则可以反复检查“代码是否真的满足 plan”。尤其是算法任务里常见的隐性问题——train/test split 混用、metric 口径变化、seed 不固定、eval 样本被过滤、配置默认值改变、结果文件覆盖、昂贵训练被误触发——都应该写进 plan 或 Codex review 的关注点里。
+
+不建议把 Humanize 用成完全自动化的“研究员”。下面几类任务应该谨慎：
+
+- 目标还停留在“提升效果”“试试新结构”，但没有 baseline、指标和数据集；
+- 需要长时间 GPU 训练、大额 API 调用、付费数据抓取或线上流量实验；
+- 涉及用户隐私、受限数据、账号 token、商业敏感 prompt 或模型权重；
+- 需要人判断业务收益、伦理边界、合规风险，而不是单纯改代码；
+- 计划本身你没读懂，却直接 `--yolo` 让 loop 长时间跑。
+
+更推荐的使用方式是：先让 Humanize 帮你把算法想法变成 plan，人类 review 后再启动 RLCR；实现结束后，把 Codex review 当成“工程质量与可复现性审查”，而不是把它当成算法效果的最终证明。真正的离线大评测、训练成本控制、线上实验和结论解释，仍然应该由算法负责人把关。
+
 | 场景 | 怎么用 | 产出 |
 |---|---|---|
 | 中大型功能实现 | draft -> gen-plan -> refine-plan -> start-rlcr-loop | 可追踪的多轮实现、summary、review result |
+| 算法实验工程化 | 把研究假设写成 plan，再让 Claude 改 pipeline / config / eval | 可复现的实验代码、固定验证命令、风险记录 |
+| 评测体系改造 | 明确 dataset、metric、baseline 和 regression test 后启动 RLCR | 更稳定的 eval harness、报告格式和回归保护 |
 | 已有 diff 审查 | `/humanize:start-rlcr-loop --skip-impl` | Codex 对当前改动的质量反馈 |
 | 设计方案二次意见 | `/humanize:ask-codex "review this plan"` | 单次 Codex 分析结果 |
 | 团队计划审阅 | 在 plan 中加入 `CMT:` 或 `<cmt>` 注释后运行 refine-plan | 清理后的 plan 和 QA ledger |
